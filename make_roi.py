@@ -10,7 +10,7 @@ from subprocess import check_output
 def make_roi (region, cope_num):
   for file in glob.glob('/corral-repl/utexas/poldracklab/data/sugar_brain/sb_00*/model/Lev2/lev2_taste_fnirt.gfeat/cope'+cope_num+'.feat/stats/cope1.nii.gz'): 
     y= region+'nii.gz'
-    x=subprocess.call(['fslstats',file,'-m', '-k /corral-repl/utexas/poldracklab/data/sugar_brain/ROIs/',y]) 
+    x=subprocess.call(['fslstats',file,'-m','-k /corral-repl/utexas/poldracklab/data/sugar_brain/ROIs/Left_Caudate_test_bin.nii.gz']) 
     print x
 
 def main():
