@@ -5,16 +5,16 @@ import subprocess
 from subprocess import check_output
  
 
-def make_mask(basedir, targetdir, repl_dict):
-  for dir in glob.glob(basedir+sub+targetdir+'taste_run*/reg/'):
+def make_mask(basedir, targetdir):
+  for dir in glob.glob(basedir+'sb_00*'+targetdir+'taste_run*/reg/'):
     os.chdir(dir)
     print "hello"
     print "now in" +os.getcwd()
-    #subprocess.call( 'invwarp -w  highres2standard_warp.nii.gz -o standard2highres_warp.nii.gz -r highres.nii.gz', shell=True)
-    #print "starting apply warp"
-    #subprocess.call('applywarp -i /corral-repl/utexas/poldracklab/data/sugar_brain/ROIs/RCaudate_mask.nii.gz -r example_func.nii.gz -o RCaudateMaskFunc.nii.gz -w standard2highres_warp --postmat=highres2example_func.mat', shell=True)
-    #print "starting fslmaths"
-    #subprocess.call('fslmaths RCaudateMaskFunc.nii.gz -thr 0.5 -bin RCaudateMaskFuncBin.nii.gz', shell=True) 
+    subprocess.call( 'invwarp -w  highres2standard_warp.nii.gz -o standard2highres_warp.nii.gz -r highres.nii.gz', shell=True)
+    print "starting apply warp"
+    subprocess.call('applywarp -i /corral-repl/utexas/poldracklab/data/sugar_brain/ROIs/RCaudate_mask.nii.gz -r example_func.nii.gz -o RCaudateMaskFunc.nii.gz -w standard2highres_warp --postmat=highres2example_func.mat', shell=True)
+    print "starting fslmaths"
+    subprocess.call('fslmaths RCaudateMaskFunc.nii.gz -thr 0.5 -bin RCaudateMaskFuncBin.nii.gz', shell=True) 
 
 def main():
   #check_args=1
@@ -28,5 +28,5 @@ def main():
   basedir='/corral-repl/utexas/poldracklab/data/sugar_brain/'
   targetdir='/model/feat/'
   #repl_dict={'SUBNUM':sub}
-  make_mask(basedir, targetdir, repl_dict)
+  make_mask(basedir, targetdir)
 main()
