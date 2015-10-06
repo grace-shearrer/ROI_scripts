@@ -25,6 +25,7 @@ def make_mask(basedir, targetdir, targetfile, sub, repl_dict):
     subprocess.call('applywarp -i /corral-repl/utexas/poldracklab/data/sugar_brain/ROIs/RCaudate_mask.nii.gz -r example_func.nii.gz -o RCaudateMaskFunc.nii.gz -w standard2highres_warp --postmat=highres2example_func.mat', shell=True)
     print "starting fslmaths"
     subprocess.call('fslmaths RCaudateMaskFunc.nii.gz -thr 0.5 -bin RCaudateMaskFuncBin.nii.gz', shell=True)
+    #print new_file
   #f.write('%s\n' % (new_file,))
 
 #f.close() 
