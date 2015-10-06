@@ -4,18 +4,12 @@ import os
 from subprocess import check_output
 
 
-f=open('make_rois.sh', 'w')
+#f=open('make_rois.sh', 'w')
 
 def make_roi (region, cope_num):
-  for file in glob.glob('/corral-repl/utexas/poldracklab/data/sugar_brain/sb_00*/model/Lev2/lev2_taste_fnirt.gfeat/cope'+cope_num+'.feat/stats/cope1.nii.gz'):
-    #print file 
-    new_file= 'fslstats '+file+' -m -k /corral-repl/utexas/poldracklab/data/sugar_brain/ROIs/func_'+region+'.nii.gz > /corral-repl/utexas/poldracklab/data/sugar_brain/sb_00*/model/'+region+'/cope'+cope_num+'.txt' 
-    if not os.path.exists(new_file):
-      #print new_file
-      f.write('%s\n' % (new_file,))
-      print "done"
-  f.close()   
-
+  for file in glob.glob('/corral-repl/utexas/poldracklab/data/sugar_brain/sb_00*/model/Lev2/lev2_taste_fnirt.gfeat/cope'+cope_num+'.feat/stats/cope1.nii.gz'): 
+    x=subprocess.Popen('fslstats '+file+' -m -k /corral-repl/utexas/poldracklab/data/sugar_brain/ROIs/func_'+region+'.nii.gz) 
+    print x
 
 def main():
   check_args=2

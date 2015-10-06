@@ -8,7 +8,7 @@ from subprocess import check_output
 
 def make_roi (region, cope_num):
   for file in glob.glob('/corral-repl/utexas/poldracklab/data/sugar_brain/sb_00*/model/Lev2/lev2_taste_fnirt.gfeat/cope'+cope_num+'.feat/stats/cope1.nii.gz'): 
-    x=subprocess.Popen('fslstats '+file+' -m -k /corral-repl/utexas/poldracklab/data/sugar_brain/ROIs/func_'+region+'.nii.gz) 
+    x=subprocess.call(['fslstats',file,'-m', '-k /corral-repl/utexas/poldracklab/data/sugar_brain/ROIs/func_',region,'.nii.gz']) 
     print x
 
 def main():
@@ -21,3 +21,7 @@ def main():
     cope_num=sys.argv[2]
   make_roi(region, cope_num)
 main()
+
+
+
+#subprocess.call(['wc', '-l', file])
