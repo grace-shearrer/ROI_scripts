@@ -24,8 +24,9 @@ def make_mask(basedir, targetdir):
     print "starting fslstats"
     f=open('RCaudatevalues.txt', 'w')
     for filename in glob.glob('cope*'):
-      output=subprocess.call(['fslstats', filename, '-m','-k','../reg/RCaudateMaskFuncBin.nii.gz','>>','RCaudateValues.txt'])
-      f.write('%s\n' % (output,))
+      output=subprocess.Popen(['fslstats', filename, '-m','-k','../reg/RCaudateMaskFuncBin.nii.gz'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+      x=output.communicate()
+      f.write('%s\n' % (x[0],))
     f.close()
       
 def main():
@@ -34,4 +35,4 @@ def main():
   targetdir='/model/feat/'
   make_mask(basedir, targetdir)
 main()
-#subprocess.call(['wc', '-l', file])
+
