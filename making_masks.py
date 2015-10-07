@@ -9,7 +9,7 @@ from subprocess import check_output
  
 
 def make_mask(basedir, targetdir):
-  for dir in glob.glob(basedir+'sb_00*'+targetdir+'taste_run*/'):
+  for dir in glob.glob(basedir+'sb_001'+targetdir+'taste_run*/'):
     os.chdir(dir+'reg/')
     print "hello"
     print "now in" +os.getcwd()
@@ -20,11 +20,18 @@ def make_mask(basedir, targetdir):
     subprocess.call('fslmaths RCaudateMaskFunc.nii.gz -thr 0.5 -bin RCaudateMaskFuncBin.nii.gz', shell=True) 
     print "starting fslstats"
     os.chdir('../stats/')
+    print "now in" +os.getcwd()
     print "starting fslstats"
-    subprocess.call('fslstats cope*.nii.gz -m -k ../reg/RCaudateMaskFuncBin.nii.gz', shell=True)
+    f=open('RCaudatevalues.txt', 'w')
+    for filename in glob.glob('cope*'):
+      output=subprocess.call(['fslstats', filename, '-m','-k','../reg/RCaudateMaskFuncBin.nii.gz','>>','RCaudateValues.txt'])
+      f.write('%s\n' % (output,))
+    f.close()
+      
 def main():
 #Global variables
   basedir='/corral-repl/utexas/poldracklab/data/sugar_brain/'
   targetdir='/model/feat/'
   make_mask(basedir, targetdir)
 main()
+#subprocess.call(['wc', '-l', file])
