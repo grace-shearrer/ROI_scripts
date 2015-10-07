@@ -11,7 +11,7 @@ from subprocess import check_output
  
 
 def make_mask(basedir, targetdir):
-  for dir in glob.glob(basedir+'sb_001'+targetdir+'taste_run*/'):
+  for dir in glob.glob(basedir+'sb_00*'+targetdir+'taste_run*/'):
     os.chdir(dir+'reg/')
     print "hello"
     print "now in" +os.getcwd()
