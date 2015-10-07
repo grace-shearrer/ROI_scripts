@@ -1,5 +1,7 @@
 #This creates the necessary masks and ROIs in every feat directory
 #The region is hard coded and requires you to change it
+#at the end use "find . -name RCaudatevalues.txt -exec cat {} \; >> TotalCaudate.txt" 
+#this will cat all the files for this particular region
 
 import sys
 import glob
