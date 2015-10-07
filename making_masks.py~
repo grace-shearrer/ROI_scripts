@@ -22,8 +22,12 @@ def make_mask(basedir, targetdir):
     os.chdir('../stats/')
     print "now in" +os.getcwd()
     print "starting fslstats"
+    f=open('RCaudatevalues.txt', 'w')
     for filename in glob.glob('cope*'):
-      subprocess.call(['fslstats', filename, '-m','-k','../reg/RCaudateMaskFuncBin.nii.gz','>>','RCaudateValues.txt'])
+      output=subprocess.call(['fslstats', filename, '-m','-k','../reg/RCaudateMaskFuncBin.nii.gz','>>','RCaudateValues.txt'])
+      f.write('%s\n' % (output,))
+    f.close()
+      
 def main():
 #Global variables
   basedir='/corral-repl/utexas/poldracklab/data/sugar_brain/'
