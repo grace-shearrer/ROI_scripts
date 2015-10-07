@@ -20,8 +20,8 @@ def make_mask(basedir, targetdir):
     subprocess.call('fslmaths RCaudateMaskFunc.nii.gz -thr 0.5 -bin RCaudateMaskFuncBin.nii.gz', shell=True) 
     print "starting fslstats"
     os.chdir('../stats/')
-    print "starting fslstats"
-    subprocess.call('fslstats cope*.nii.gz -m -k ../reg/RCaudateMaskFuncBin.nii.gz', shell=True)
+    for filename in glob.glob('cope*.nii.gz'):
+      subprocess.call(['fslstats',filename, '-m -k ../reg/RCaudateMaskFuncBin.nii.gz'], shell=True)
 def main():
 #Global variables
   basedir='/corral-repl/utexas/poldracklab/data/sugar_brain/'
